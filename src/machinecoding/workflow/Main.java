@@ -13,16 +13,16 @@ public class Main {
         ApprovedLeaveStep approvedLeaveStep = new ApprovedLeaveStep();
         RejectedLeaveStep rejectedLeaveStep = new RejectedLeaveStep();
 
-        Condition isCreatedStatus = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.CREATED));
-        Condition isPendingStatus = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.PENDING));
-        Condition isApprovedStatus = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.APPROVED));
-        Condition isRejectedStatus = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.REJECTED));
+        Condition CreatedCondition = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.CREATED));
+        Condition PendingCondition = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.PENDING));
+        Condition ApprovedCondition = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.APPROVED));
+        Condition RejectedCondition = ((leaveObject) -> ((Leave) leaveObject).getStatus().equals(LeaveStatus.REJECTED));
 
         //Transitions
-        Transition transitInto_SystemAcceptedLeaveStep = new Transition(isCreatedStatus, systemAcceptedLeaveStep);
-        Transition transitInto_TakeActionForLeaveStep = new Transition(isPendingStatus, takeActionForLeaveStep);
-        Transition transitInto_ApprovedLeaveStep = new Transition(isApprovedStatus, approvedLeaveStep);
-        Transition transitInto_RejectedLeaveStep = new Transition(isRejectedStatus, rejectedLeaveStep);
+        Transition transitInto_SystemAcceptedLeaveStep = new Transition(CreatedCondition, systemAcceptedLeaveStep);
+        Transition transitInto_TakeActionForLeaveStep = new Transition(PendingCondition, takeActionForLeaveStep);
+        Transition transitInto_ApprovedLeaveStep = new Transition(ApprovedCondition, approvedLeaveStep);
+        Transition transitInto_RejectedLeaveStep = new Transition(RejectedCondition, rejectedLeaveStep);
 
         //Adding Transitions
         applyLeaveStep.addTransition(transitInto_SystemAcceptedLeaveStep);
