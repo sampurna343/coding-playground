@@ -16,17 +16,17 @@ public class FeeCalculationService {
 
     private FeeCalculationStrategy feeCalculationStrategy;
 
-    public Map<VehicleType, Double> fetchEstimatedPriceForEachVehicle(TripRequest tripRequest){
+    public Map<VehicleType, Double> fetchEstimatedPriceForEachVehicle(TripRequest tripRequest) {
 
         Map<VehicleType, Double> vehicleToFeeMap = new HashMap<>();
-        feeCalculationStrategy=FeeCalculationStrategyFactory.getFeeCalculationStrategy(
+        feeCalculationStrategy = FeeCalculationStrategyFactory.getFeeCalculationStrategy(
                 FeeCalculationStrategyType.TIME,
                 List.of(FeeSurgeDecoratorType.NIGHT, FeeSurgeDecoratorType.RAIN));
 
+        double fee = feeCalculationStrategy.calculateFee(tripRequest);
 
         Arrays.stream(VehicleType.values()).forEach(singleVehicleType -> {
-            double fee = feeCalculationStrategy.calculateFee(tripRequest, singleVehicleType);
-            vehicleToFeeMap.put(singleVehicleType, singleVehicleType.getPriceMultiplier()*fee);
+            vehicleToFeeMap.put(singleVehicleType, singleVehicleType.getPriceMultiplier() * fee);
         });
         return vehicleToFeeMap;
     }

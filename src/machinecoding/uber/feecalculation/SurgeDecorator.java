@@ -13,7 +13,7 @@ public abstract class SurgeDecorator implements FeeCalculationStrategy{
 
     @Override
     public double calculateFee(TripRequest tripRequest, VehicleType vehicleType) {
-        return feeCalculationStrategy.calculateFee(tripRequest, vehicleType) + addSurgePrice();
+        return feeCalculationStrategy.calculateFee(tripRequest) + addSurgePrice();
     }
 
     public abstract double addSurgePrice();

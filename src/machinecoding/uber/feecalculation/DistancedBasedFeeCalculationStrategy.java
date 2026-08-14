@@ -5,7 +5,7 @@ import machinecoding.uber.enums.VehicleType;
 
 public class DistancedBasedFeeCalculationStrategy implements FeeCalculationStrategy{
     @Override
-    public double calculateFee(TripRequest tripRequest, VehicleType vehicleType) {
+    public double calculateFee(TripRequest tripRequest) {
         return 0;
     }
 }
